@@ -158,19 +158,22 @@
   <button class="btn" onclick="window.location.href='login.html'">Masuk</button>
 
   <script>
-    const vid = document.querySelector('video');
-    vid.addEventListener('loadeddata', () => vid.classList.add('loaded'));
+  const vid = document.querySelector('video');
+  vid.addEventListener('loadeddata', () => vid.classList.add('loaded'));
 
-    document.addEventListener('gesturestart', e => e.preventDefault());
-    document.addEventListener('gesturechange', e => e.preventDefault());
-    document.addEventListener('gestureend', e => e.preventDefault());
+  document.addEventListener('gesturestart', e => e.preventDefault());
+  document.addEventListener('gesturechange', e => e.preventDefault());
+  document.addEventListener('gestureend', e => e.preventDefault());
 
-    let lastTouch = 0;
-    document.addEventListener('touchend', e => {
-      const now = Date.now();
-      if (now - lastTouch <= 400) e.preventDefault();
-      lastTouch = now;
-    }, { passive: false });
-  </script>
+  let lastTouch = 0;
+  document.addEventListener('touchend', e => {
+    // ⛔ JANGAN blokir jika yang ditekan tombol
+    if (e.target.closest('.btn')) return;
+
+    const now = Date.now();
+    if (now - lastTouch <= 400) e.preventDefault();
+    lastTouch = now;
+  }, { passive: false });
+</script>
 </body>
 </html>
